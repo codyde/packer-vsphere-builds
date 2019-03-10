@@ -1,0 +1,12 @@
+{
+    "vcenter_server":"vcenter",
+    "username":"administrator@vsphere.local",
+    "password":"VMware123!",
+    "datastore":"vsanDatastore",
+    "folder": "_Templates",
+    "host":"esxihost",
+    "cluster": "workercluster",
+    "network": "VM Network",
+    "ssh_username": "vm preseed user",
+    "ssh_password": "vm preseed password"
+}
