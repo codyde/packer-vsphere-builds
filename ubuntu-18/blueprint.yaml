@@ -1,0 +1,79 @@
+formatVersion: 1
+name: vSphere Template Builder
+version: 1
+inputs:
+  vcenter_server:
+    type: string
+    description: "vCenter Server to connect to and build within"
+  username:
+    type: string
+    description: "vCenter Username"
+  password:
+    type: string
+    encrypted: true
+    description: "vCenter Password"
+  datastore:
+    type: string
+    description: "Datastore where output artifact will live"
+  folder:
+    type: string
+    description: "Folder in vCenter that output artifact will be placed "
+  host:
+    type: string
+    description: "ESXi host used for building against"
+  cluster:
+    type: string
+    description: "Cluster which build should take place against"
+  network:
+    type: string
+    description: "Network that should be attached to output artifact"
+  ssh_username:
+    type: string
+    description: "SSH Username for connecting to endpoint template during build"
+  ssh_password:
+    type: string
+    encrypted: true
+    description: "SSH Password for connecting to endpoint template during build"
+resources:
+  Cloud_Machine_1:
+    type: Cloud.Machine
+    properties:
+      cloudConfigSettings:
+        phoneHomeFailOnTimeout: true
+        phoneHomeShouldWait: true
+        phoneHomeTimeoutSeconds: 1000
+      image: ubuntu
+      flavor: medium
+      cloudConfig: |
+        #cloud-config
+        package_update: true
+        write_files:
+        - content: |
+              {
+                "vcenter_server":"${input.vcenter_server}",
+                "username":"${input.username}",
+                "password":"${input.password}",
+                "datastore":"${input.datastore}",
+                "folder": "${input.folder}",
+                "host":"${input.host}",
+                "cluster": "${input.cluster}",
+                "network": "${input.network}",
+                "ssh_username": "${input.ssh_username}",
+                "ssh_password": "${input.ssh_password}"
+              }
+          path: /variables.json
+        packages:
+          - git
+          - wget
+          - unzip
+        runcmd:
+          - wget https://releases.hashicorp.com/packer/1.3.5/packer_1.3.5_linux_amd64.zip
+          - unzip packer_1.3.5_linux_amd64.zip
+          - chmod +x packer && mv packer /bin/packer
+          - wget https://github.com/jetbrains-infra/packer-builder-vsphere/releases/download/v2.3/packer-builder-vsphere-iso.linux
+          - chmod +x packer-builder-vsphere-iso.linux
+          - git clone -b cas-blueprint https://github.com/codyde/packer-vsphere-builds
+          - mv packer-vsphere-builds/ubuntu-18/* /
+          - packer build -force -var-file variables.json ubuntu-18.json
+      constraints:
+        - tag: 'env:vsphere'
