@@ -32,8 +32,8 @@
   
         "network_card": "vmxnet3",
   
-        "iso_urls": "http://cdimage.ubuntu.com/releases/18.04/release/ubuntu-18.04.2-server-amd64.iso",
-        "iso_checksum": "a2cb36dc010d98ad9253ea5ad5a07fd6b409e3412c48f1860536970b073c98f5",
+        "iso_urls": "http://cdimage.ubuntu.com/releases/18.04/release/ubuntu-18.10-server-amd64.iso",
+        "iso_checksum": "cf9250781dadd919f23c9d9612212cad653e35fccc2fbcf6853f67ad09e067ba",
         "iso_checksum_type": "sha256",
 
         "floppy_files": [
