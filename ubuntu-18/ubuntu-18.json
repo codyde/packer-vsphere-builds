@@ -8,7 +8,7 @@
         "password":            "{{user `password`}}",
         "insecure_connection": "true",
   
-        "vm_name": "template_ubuntu18",
+        "vm_name": "template_ubuntu1810",
         "datastore": "{{user `datastore`}}",
         "folder": "{{user `folder`}}",
         "host":     "{{user `host`}}",
@@ -32,7 +32,7 @@
   
         "network_card": "vmxnet3",
   
-        "iso_urls": "http://cdimage.ubuntu.com/releases/18.04/release/ubuntu-18.10-server-amd64.iso",
+        "iso_urls": "http://cdimage.ubuntu.com/releases/18.10/release/ubuntu-18.10-server-amd64.iso",
         "iso_checksum": "cf9250781dadd919f23c9d9612212cad653e35fccc2fbcf6853f67ad09e067ba",
         "iso_checksum_type": "sha256",
 
