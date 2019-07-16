@@ -8,7 +8,7 @@
         "password":            "{{user `password`}}",
         "insecure_connection": "true",
   
-        "vm_name": "template_ubuntu18",
+        "vm_name": "template_ubuntu18-init",
         "datastore": "{{user `datastore`}}",
         "folder": "{{user `folder`}}",
         "host":     "{{user `host`}}",
